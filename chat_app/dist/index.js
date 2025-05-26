@@ -14,11 +14,19 @@ dotenv.config();
 const openai = new OpenAI(); //instance of openAi
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield openai.chat.completions.create({
-            messages: [{ role: "user", content: "Hello !" }],
-            model: "gpt-3.5-turbo",
-        });
-        console.log(response.choices[0].message.content);
+        const input = require("prompt-sync")({ sigint: true });
+        while (true) {
+            const userInput = input();
+            if (userInput.toLocaleLowerCase() === "exit") {
+                console.log("Exiting chat...");
+                break;
+            }
+            const response = yield openai.chat.completions.create({
+                messages: [{ role: "user", content: userInput }],
+                model: "gpt-3.5-turbo",
+            });
+            console.log(response.choices[0].message.content);
+        }
     });
 }
 run();
