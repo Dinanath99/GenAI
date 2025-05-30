@@ -17,13 +17,14 @@ const openai_1 = __importDefault(require("openai"));
 dotenv_1.default.config({});
 const openai = new openai_1.default();
 //creating our own tool to get time in newyork
-function getTimeInNewYork() {
+function getTimeInNepal() {
     return new Date().toLocaleString("en-US", {
         timeZone: "America/New_York",
     });
 }
 function callOpenAITool() {
     return __awaiter(this, void 0, void 0, function* () {
+        var _a, _b;
         const context = [
             {
                 role: "system",
@@ -41,15 +42,32 @@ function callOpenAITool() {
                 {
                     type: "function",
                     function: {
-                        name: "getTimeInNewYork",
-                        description: "Get current time in newyork",
+                        name: "getTimeInNepal",
+                        description: "Get current time in Nepal",
                     },
                 },
             ],
             tool_choice: "auto",
         });
         const willInvokeTheTool = response.choices[0].finish_reason === "tool_calls";
-        console.log(response.choices[0].message.content);
+        const toolCall = (_a = response.choices[0].message.tool_calls) === null || _a === void 0 ? void 0 : _a[0];
+        if (willInvokeTheTool) {
+            const toolName = toolCall === null || toolCall === void 0 ? void 0 : toolCall.function.name;
+            if (toolName === "getTimeInNepal") {
+                const time = getTimeInNepal();
+                context.push(response.choices[0].message);
+                context.push({
+                    role: "tool",
+                    content: time,
+                    tool_call_id: (_b = toolCall === null || toolCall === void 0 ? void 0 : toolCall.id) !== null && _b !== void 0 ? _b : "",
+                });
+            }
+        }
+        const secondReponse = yield openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: context,
+        });
+        console.log(secondReponse.choices[0].message.content);
     });
 }
 callOpenAITool();
