@@ -13,20 +13,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
+const fs_1 = require("fs");
 const openai_1 = __importDefault(require("openai"));
 dotenv_1.default.config();
 const openai = new openai_1.default();
 function generateImageFromText() {
     return __awaiter(this, void 0, void 0, function* () {
+        var _a, _b;
         const response = yield openai.images.generate({
-            prompt: "A beautiful landscape with mountains and a river",
-            n: 1, //number of response
+            prompt: "An astronaut riding a horse in a futuristic city",
+            n: 1,
             size: "1024x1024",
             model: "dall-e-3",
             quality: "standard",
             style: "vivid",
+            response_format: "b64_json", // Required to get base64 string
         });
-        console.log(response);
+        const base64Image = (_b = (_a = response.data) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.b64_json;
+        if (base64Image) {
+            (0, fs_1.writeFileSync)("image.png", Buffer.from(base64Image, "base64"));
+            console.log("Image saved as image.png");
+        }
+        else {
+            console.log("Failed to generate image.");
+        }
     });
 }
 generateImageFromText();
