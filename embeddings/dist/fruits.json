@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "name": "lapsi",
+    "description": "A sour fruit native to Nepal, often made into pickles, candies, and titaura."
+  },
+  {
+    "id": "2",
+    "name": "aam (mango)",
+    "description": "A juicy tropical fruit popular in Nepal, enjoyed raw or in juices during summer."
+  },
+  {
+    "id": "3",
+    "name": "naspati (Asian pear)",
+    "description": "A crisp and juicy fruit that is shaped like a pear but has the texture of an apple."
+  },
+  {
+    "id": "4",
+    "name": "kagati (Nepali lemon)",
+    "description": "A small, round lemon with strong sourness, commonly used in Nepali cuisine and drinks."
+  },
+  {
+    "id": "5",
+    "name": "anar (pomegranate)",
+    "description": "A red fruit with juicy seeds, known for its sweetness and health benefits."
+  },
+  {
+    "id": "6",
+    "name": "amala (Indian gooseberry)",
+    "description": "A small green fruit rich in Vitamin C, used in pickles and Ayurvedic medicine."
+  },
+  {
+    "id": "7",
+    "name": "bel (wood apple)",
+    "description": "A hard-shelled fruit used to make a traditional cooling drink in summer."
+  },
+  {
+    "id": "8",
+    "name": "rukh katahar (jackfruit)",
+    "description": "A large tropical fruit with a sweet, fibrous flesh often eaten fresh or cooked."
+  },
+  {
+    "id": "9",
+    "name": "bhuin katahar (breadfruit)",
+    "description": "A starchy fruit eaten cooked, similar in texture to potatoes or yam."
+  },
+  {
+    "id": "10",
+    "name": "tamarind (imli)",
+    "description": "A sour, tangy fruit used in chutneys, snacks, and traditional Nepali dishes."
+  }
+]
